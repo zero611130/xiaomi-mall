@@ -6,8 +6,10 @@ class ManagerController extends Controller {
   async index() {
     // this.ctx.body='管理员列表'
 
+    const { username } = this.ctx.session.userinfo;
+    console.log("====  userinfo =====", this.ctx.session.userinfo);
     await this.ctx.render("admin/manager/index", {
-      username: "张三",
+      username: username || "陌生人",
     });
   }
 

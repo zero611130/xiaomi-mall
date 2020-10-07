@@ -30,6 +30,21 @@ module.exports = (appInfo) => {
     },
   };
 
+  config.session = {
+    key: "SESSION_ID",
+    maxAge: 864000,
+    httpOnly: true,
+    encrypt: true,
+    renew: true, //  延长会话有效期
+  };
+
+  config.mongoose = {
+    client: {
+      url: "mongodb://127.0.0.1/xiaomi",
+      options: {},
+    },
+  };
+
   config.middleware = ["adminauth"];
   config.adminauth = {
     match: "/admin/*",

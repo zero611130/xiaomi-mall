@@ -7,7 +7,7 @@ module.exports = (options) => {
     if (ctx.session.userinfo) {
       await next();
     } else {
-      if (["/admin/login", "/admin/doLogin", "/admin/verify"].includes(path)) {
+      if (["/admin/login", "/admin/dologin", "/admin/verify"].includes(path)) {
         await next();
       } else {
         ctx.redirect("/admin/login");
