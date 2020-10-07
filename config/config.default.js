@@ -30,6 +30,11 @@ module.exports = (appInfo) => {
     },
   };
 
+  config.middleware = ["adminauth"];
+  config.adminauth = {
+    match: "/admin/*",
+  };
+
   return {
     ...config,
     ...userConfig,
