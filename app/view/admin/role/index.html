@@ -30,6 +30,7 @@
                             <td><%=roleData[i].description%></td>
                             <td><%=roleData[i].add_time%></td>
                             <td class="text-center">
+                                <a href="/admin/role/auth?id=<%=roleData[i]._id%>">授权</a>
                                 <a href="/admin/role/edit?id=<%=roleData[i]._id%>">修改</a> 　
                                 <a href="/admin/role/delete?id=<%=roleData[i]._id.toString()%>&model=Role">删除</a></td>
                         </tr>

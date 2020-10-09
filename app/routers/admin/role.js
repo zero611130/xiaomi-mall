@@ -7,4 +7,6 @@ module.exports = (app) => {
 
   router.post("/admin/role/doEdit", controller.admin.role.editRole);
   router.get("/admin/role/edit", controller.admin.role.edit);
+  // /admin/role/auth
+  router.get("/admin/role/auth", controller.admin.role.authpage);
 };

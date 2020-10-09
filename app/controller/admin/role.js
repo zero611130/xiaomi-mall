@@ -47,6 +47,57 @@ class RoleController extends BaseController {
     );
     res && (await this.success("/admin/role", "更新角色信息成功"));
   }
+
+  async authpage() {
+    const { id } = this.ctx.request.query;
+    console.log("=====id=====", id);
+    // const allAccess = this.model
+    //查询现有所有权限
+
+    const allAccess = await this.ctx.model.Access.aggregate([
+      {
+        $lookup: {
+          from: "access",
+          localField: "_id",
+          foreignField: "module_id",
+          as: "items",
+        },
+      },
+      {
+        $match: {
+          module_id: "0",
+        },
+      },
+    ]);
+
+    const currentRoleAccess = await this.ctx.model.RoleAccess.find({
+      role_id: id,
+    });
+
+    const roleAccessContainer = [];
+
+    currentRoleAccess.forEach((item) => {
+      roleAccessContainer.push(item.access_id.toString());
+    });
+
+    allAccess.forEach((topAccitem) => {
+      if (roleAccessContainer.includes(topAccitem._id.toString())) {
+        topAccitem.checked = true;
+      }
+      topAccitem.items.forEach((secAccitem) => {
+        if (roleAccessContainer.includes(secAccitem._id.toString())) {
+          secAccitem.checked = true;
+        }
+      });
+    });
+
+    // console.log("====currentRoleAccess  ====", currentRoleAccess);
+    // this.ctx.body = { ...currentRoleAccess };
+    await this.ctx.render("admin/role/auth", {
+      list: allAccess,
+      role_id: id,
+    });
+  }
 }
 
 module.exports = RoleController;

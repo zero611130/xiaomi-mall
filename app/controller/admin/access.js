@@ -1,9 +1,6 @@
 "use strict";
 
 const BaseController = require("./base");
-
-const Controller = require("egg").Controller;
-
 class AccessController extends BaseController {
   async index() {
     //自关联表 查询 菜单和操作 的  module_id  === 其父级模块的ID
