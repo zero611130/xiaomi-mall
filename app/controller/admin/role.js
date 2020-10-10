@@ -98,6 +98,23 @@ class RoleController extends BaseController {
       role_id: id,
     });
   }
+
+  async doAuth() {
+    const { access_node, role_id } = this.ctx.request.body;
+    //清空上次的保存记录
+    this.ctx.model.RoleAccess.deleteMany({
+      role_id,
+    });
+    for (const nodeItem of access_node) {
+      const newRoleAccessItem = new this.ctx.model.RoleAccess({
+        access_id: this.app.mongoose.Types.ObjectId(nodeItem),
+        role_id: this.app.mongoose.Types.ObjectId(role_id),
+      });
+
+      await newRoleAccessItem.save();
+    }
+    await this.success("/admin/role", "权限修改成功");
+  }
 }
 
 module.exports = RoleController;
