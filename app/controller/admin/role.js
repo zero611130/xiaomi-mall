@@ -102,8 +102,8 @@ class RoleController extends BaseController {
   async doAuth() {
     const { access_node, role_id } = this.ctx.request.body;
     //清空上次的保存记录
-    this.ctx.model.RoleAccess.deleteMany({
-      role_id,
+    await this.ctx.model.RoleAccess.deleteMany({
+      role_id: role_id,
     });
     for (const nodeItem of access_node) {
       const newRoleAccessItem = new this.ctx.model.RoleAccess({
