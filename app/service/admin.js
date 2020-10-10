@@ -32,16 +32,14 @@ class AdminService extends Service {
       "/admin/login",
       "/admin/doLogin",
       "/admin/verify",
-      "/admin/loginOut",
+      "/admin/logout",
     ];
     //不需要进行访问验证
+
     if (ignoreUrl.includes(vistingUrl || is_super === 1)) {
-      return;
+      return true;
     }
     // 当前用户拥有这个权限
-
-    // console.log("====== vistingUrlAccess   =============", vistingUrlAccess);
-
     if (vistingUrlAccess.length) {
       const { _id } = vistingUrlAccess[0];
       if (currentUserAccessList.includes(_id.toString())) {

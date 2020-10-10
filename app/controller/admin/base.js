@@ -28,7 +28,6 @@ class BaseController extends Controller {
 
   async delete() {
     const { model, id } = this.ctx.request.query;
-    console.log("==========================");
     let res = await this.ctx.model[model].findOneAndDelete({ _id: id });
     await this.ctx.redirect(this.ctx.state.prevPage);
   }
