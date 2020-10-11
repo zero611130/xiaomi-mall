@@ -17,4 +17,16 @@ module.exports = (app) => {
   require("./routers/admin/role.js")(app);
   //分类管理
   require("./routers/admin/access.js")(app);
+
+  //轮播图
+  router.get("/admin/focus", controller.admin.focus.index);
+
+  router.get("/admin/focus/add", controller.admin.focus.add);
+  router.post("/admin/focus/doAdd", controller.admin.focus.doAdd);
+
+  router.get("/admin/focus/edit", controller.admin.focus.edit);
+
+  router.post("/admin/focus/doEdit", controller.admin.focus.doEdit);
+  // /admin/focus/delete
+  router.get("/admin/focus/delete", controller.admin.focus.deletefocus);
 };

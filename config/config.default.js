@@ -30,6 +30,9 @@ module.exports = (appInfo) => {
     },
   };
 
+  //文件上传地址
+  config.uploadDir = "app/public/admin/upload";
+
   config.session = {
     key: "SESSION_ID",
     maxAge: 864000,

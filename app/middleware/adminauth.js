@@ -15,10 +15,6 @@ module.exports = (options) => {
           ctx.session.userinfo
         );
 
-        console.log(
-          "============ ctx.state.asideList ===========",
-          ctx.state.asideList
-        );
         await next();
       } else {
         ctx.body = "您没有访问页面权限";

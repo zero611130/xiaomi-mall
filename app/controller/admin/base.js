@@ -26,11 +26,13 @@ class BaseController extends Controller {
     this.ctx.body = captcha.data;
   }
 
-  async delete() {
-    const { model, id } = this.ctx.request.query;
+  async delete(id, model) {
+    // const { model, id } = this.ctx.request.query;
     let res = await this.ctx.model[model].findOneAndDelete({ _id: id });
     await this.ctx.redirect(this.ctx.state.prevPage);
   }
+
+  async changeStatus() {}
 }
 
 module.exports = BaseController;

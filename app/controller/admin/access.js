@@ -92,7 +92,7 @@ class AccessController extends BaseController {
 
   async deleteAccess() {
     const { id, model } = this.ctx.request.query;
-    await this.delete(model, id);
+    await this.delete(id, model);
   }
 }
 

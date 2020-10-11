@@ -80,7 +80,6 @@ class AdminService extends Service {
 
     allAccessInfo.forEach((topItem) => {
       if (currentUserAccessContainer.includes(topItem._id.toString())) {
-        console.log("=========", topItem._id.toString());
         topItem.checked = true;
       }
 
@@ -90,16 +89,6 @@ class AdminService extends Service {
         }
       });
     });
-
-    console.log(
-      "============ currentUserAccessContainer ==============",
-      currentUserAccessContainer
-    );
-
-    console.log(
-      "================     allAccessInfo    ================",
-      allAccessInfo
-    );
     return allAccessInfo;
   }
 }

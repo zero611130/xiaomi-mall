@@ -17,6 +17,7 @@ class ManagerController extends BaseController {
         },
       },
     ]);
+
     await this.ctx.render("admin/manager/index", { list: managerData });
   }
 
@@ -85,7 +86,6 @@ class ManagerController extends BaseController {
   }
 
   async deleteManager() {
-    console.log(" ==========  deleteManager  ==========");
     const { id, model } = this.ctx.request.query;
     await this.delete(id, model);
   }
