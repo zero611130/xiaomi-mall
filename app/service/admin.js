@@ -49,6 +49,59 @@ class AdminService extends Service {
     }
     return false;
   }
+
+  async getNavlist(userInfo) {
+    const { role_id } = userInfo;
+
+    //获取当前用户拥有的 权限数组 start
+    const currentUserAccessContainer = [];
+    const currentUserAccess = await this.ctx.model.RoleAccess.find({
+      role_id: role_id,
+    });
+    currentUserAccess.forEach((accitem) => {
+      currentUserAccessContainer.push(accitem.access_id.toString());
+    });
+
+    //获取当前用户拥有的 权限数组 end
+
+    const allAccessInfo = await this.ctx.model.Access.aggregate([
+      {
+        $lookup: {
+          from: "access",
+          localField: "_id",
+          foreignField: "module_id",
+          as: "items",
+        },
+      },
+      {
+        $match: { module_id: "0" },
+      },
+    ]);
+
+    allAccessInfo.forEach((topItem) => {
+      if (currentUserAccessContainer.includes(topItem._id.toString())) {
+        console.log("=========", topItem._id.toString());
+        topItem.checked = true;
+      }
+
+      topItem.items.forEach((secItem) => {
+        if (currentUserAccessContainer.includes(secItem._id.toString())) {
+          secItem.checked = true;
+        }
+      });
+    });
+
+    console.log(
+      "============ currentUserAccessContainer ==============",
+      currentUserAccessContainer
+    );
+
+    console.log(
+      "================     allAccessInfo    ================",
+      allAccessInfo
+    );
+    return allAccessInfo;
+  }
 }
 
 module.exports = AdminService;
