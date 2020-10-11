@@ -29,4 +29,7 @@ module.exports = (app) => {
   router.post("/admin/focus/doEdit", controller.admin.focus.doEdit);
   // /admin/focus/delete
   router.get("/admin/focus/delete", controller.admin.focus.deletefocus);
+
+  //改变状态
+  router.get("/admin/changeStatus", controller.admin.base.changeStatus);
 };

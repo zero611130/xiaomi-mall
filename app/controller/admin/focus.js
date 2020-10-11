@@ -48,7 +48,6 @@ class FocusController extends BaseController {
 
   async edit() {
     var id = this.ctx.request.query.id;
-    console.log("============ id  ============", id);
     var result = await this.ctx.model.Focus.find({ _id: id });
     await this.ctx.render("admin/focus/edit", {
       list: result[0],
@@ -88,7 +87,6 @@ class FocusController extends BaseController {
   }
 
   async deletefocus() {
-    console.log("=====================================");
     const { id, model } = this.ctx.request.query;
     await this.delete(id, model);
   }
