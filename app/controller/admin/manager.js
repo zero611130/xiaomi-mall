@@ -1,5 +1,6 @@
 "use strict";
 
+const md5 = require("md5");
 const BaseController = require("./base");
 
 class ManagerController extends BaseController {
@@ -47,7 +48,7 @@ class ManagerController extends BaseController {
     }
     const newUser = new this.ctx.model.Admin({
       username,
-      password,
+      password: md5(password),
       mobile,
       email,
       role_id,

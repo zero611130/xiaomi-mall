@@ -46,9 +46,6 @@ class AccessController extends BaseController {
     });
   }
 
-
-
-  
   async addPermission() {
     const formData = this.ctx.request.body;
     const { module_id } = formData;

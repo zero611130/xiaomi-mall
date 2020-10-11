@@ -5,8 +5,6 @@ const url = require("url");
 module.exports = (options) => {
   return async function adminauth(ctx, next) {
     ctx.state.csrf = ctx.csrf;
-    console.log("======md=====", md5("zhengfan"));
-
     ctx.state.prevPage = ctx.request.headers["referer"] || "/";
     const path = url.parse(ctx.request.url).pathname;
     if (ctx.session.userinfo) {
